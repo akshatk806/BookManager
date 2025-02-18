@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { Book } from '../models/book';
 import { AddBook, RemoveBook } from '../books/book.action';
 
@@ -10,7 +11,11 @@ import { AddBook, RemoveBook } from '../books/book.action';
   styleUrl: './book-list.component.css'
 })
 export class BookListComponent {
-  constructor(private store: Store<{books: Book[]}>) { }
+  books$: Observable<Book[]>;
+
+  constructor(private store: Store<{books: Book[]}>) {
+    this.books$ = store.pipe(select('books'))             // we notify because we subscribed to obserable
+   }
 
   addBook(id: string, title: string, author: string): void {
     // dispatch = starting an action
