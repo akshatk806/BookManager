@@ -11,7 +11,7 @@ import { Book } from "../models/book";
 
 
 // the reducer always need a initial state
-export const initialState: ReadonlyArray<Book> = [];
+export const initialState: Book[] = [];
 
 // reducer, If a reducer processes an action then you will take current state -> copy -> make changes and returns a new state. So in order that we can copy a state we need a initialState atleast
 export const BookReducer = createReducer(

@@ -3,6 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Book } from '../models/book';
 import { AddBook, RemoveBook } from '../books/book.action';
+import { AppState } from '../app.state';
 
 @Component({
   selector: 'app-book-list',
@@ -13,9 +14,9 @@ import { AddBook, RemoveBook } from '../books/book.action';
 export class BookListComponent {
   books$: Observable<Book[]>;
 
-  constructor(private store: Store<{books: Book[]}>) {
-    this.books$ = store.pipe(select('books'))             // we notify because we subscribed to obserable
-   }
+  constructor(private store: Store<AppState>) {
+    this.books$ = store.pipe(select('book'))             // Since this.books$ is an observable, the component can subscribe to it and get real-time updates whenever the books state changes.
+  }
 
   addBook(id: string, title: string, author: string): void {
     // dispatch = starting an action
