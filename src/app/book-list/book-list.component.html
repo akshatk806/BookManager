@@ -1,1 +1,14 @@
-<p>book-list works!</p>
+<h1>Books</h1>
+<div *ngFor="let book of books$ | async">    <!-- we have to pipe it by async so that we get notified and that the content of loop updated as soon as we recieve an update from NgRx -->
+    <h3>{{ book.title }}</h3>
+    <h4>{{ book.author }}</h4>
+    <button (click)="removeBook(book.id)">Remove Book</button>
+</div>
+
+<h2>Create a New Book</h2>
+<div>
+    <input #bookId type="text" placeholder="Book Id">          <!-- #bookId is reference variable for this input tag -->
+    <input #bookTitle type="text" placeholder="Book Title">
+    <input #bookAuthor type="text" placeholder="Author">
+    <button (click)="addBook(bookId.value, bookTitle.value, bookAuthor.value)">Add Book</button>
+</div>
